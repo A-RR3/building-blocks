@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
       body: Container(
         // padding: const EdgeInsets.all(13.0),
-        margin: const EdgeInsets.fromLTRB(10,30, 10, 20),
+        margin: const EdgeInsets.fromLTRB(10, 30, 10, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               children: [
                 Text("Center",
                     style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 25,
                       fontWeight: FontWeight.w700,
                     )),
               ],
@@ -35,19 +35,40 @@ class MyApp extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    Icon(Icons.account_balance_wallet),
+                    CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.grey,
+                      child: Icon(Icons.account_balance_wallet,color: Colors.black,),
+                    ),
                     Text('wallet')
                   ],
                 ),
                 Column(
-                  children: [Icon(Icons.airport_shuttle), Text('Delivary')],
-                ),
-                Column(
-                  children: [Icon(Icons.message), Text('Message')],
+                  children: [
+                    CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.grey,
+                      child: Icon(Icons.airport_shuttle,color: Colors.black,),
+                    ),
+                    Text('Delivary')
+                  ],
                 ),
                 Column(
                   children: [
-                    Icon(Icons.monetization_on_sharp),
+                    CircleAvatar(
+                        radius: 18,
+                        backgroundColor: Colors.grey,
+                        child: Icon(Icons.message,color: Colors.black,)),
+                    Text('Message')
+                  ],
+                ),
+                Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 18,
+                      backgroundColor: Colors.grey,
+                      child: Icon(Icons.monetization_on_sharp,color: Colors.black,),
+                    ),
                     Text('Service')
                   ],
                 ),
@@ -66,10 +87,28 @@ class MyApp extends StatelessWidget {
             //     ],
             //   )
             // )
-            SetItem(iconData:  Icons.location_on_rounded, title:"Address", description:"Ensure your harvesting address"),
-            SetItem(iconData:  Icons.lock, title:"Privacy", description:"System permission change"),
-            SetItem(iconData:  Icons.backup_table_rounded, title:"General", description:"Basic functiondl settings"),
-            SetItem(iconData:  Icons.notifications_active, title:"Notification", description:"Take over the news in time")
+            SetItem(
+                iconData: Icons.location_on_rounded,
+                title: "Address",
+                description: "Ensure your harvesting address",
+              color: Colors.deepPurpleAccent,
+            ),
+            SetItem(
+                iconData: Icons.lock,
+                title: "Privacy",
+                description: "System permission change",
+              color: Colors.purpleAccent,
+            ),
+            SetItem(
+                iconData: Icons.backup_table_rounded,
+                title: "General",
+                description: "Basic functiondl settings",
+            color: Colors.orange,),
+            SetItem(
+                iconData: Icons.notifications_active,
+                title: "Notification",
+                description: "Take over the news in time",
+            color: Colors.lightBlueAccent,)
           ],
         ),
       ),
@@ -84,19 +123,20 @@ class contain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 145,
+      alignment: Alignment.topRight,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         color: Colors.blue,
         child: Padding(
             padding: const EdgeInsets.all(4.5),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Row(
                   children: [
                     const CircleAvatar(
                       backgroundColor: Colors.black,
-                      radius: 35.0,
+                      radius: 33.0,
                       backgroundImage:
                           AssetImage('./lib/assets/images/anonymous.jpg'),
                     ),
@@ -226,19 +266,20 @@ class Setting {
   IconData icon;
   String topic;
   String description;
+  Color color;
 
-  Setting(this.icon, this.topic, this.description);
+  Setting(this.icon, this.topic, this.description,this.color);
 }
 
 List<Setting> listOfSettings = [
   Setting(
-      Icons.location_on_rounded, "Address", "Ensure your harvesting address"),
+      Icons.location_on_rounded, "Address", "Ensure your harvesting address",Colors.deepPurpleAccent),
   Setting(
-      Icons.location_on_rounded, "Address", "Ensure your harvesting address"),
+      Icons.location_on_rounded, "Address", "Ensure your harvesting address",Colors.purpleAccent),
   Setting(
-      Icons.location_on_rounded, "Address", "Ensure your harvesting address"),
+      Icons.location_on_rounded, "Address", "Ensure your harvesting address",Colors.orange),
   Setting(
-      Icons.location_on_rounded, "Address", "Ensure your harvesting address")
+      Icons.location_on_rounded, "Address", "Ensure your harvesting address",Colors.lightBlueAccent)
 ];
 
 class SetItem extends StatelessWidget {
@@ -250,31 +291,34 @@ class SetItem extends StatelessWidget {
   final IconData iconData;
   final String title;
   final String description;
+  final Color color;
 
-  SetItem({required this.iconData,required this.title,required this.description });
+  SetItem(
+      {required this.iconData, required this.title, required this.description,required this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(4),
-      height: 80,
+      padding: EdgeInsets.fromLTRB(10, 0, 10, 6),
+      height: 70,
       child: Card(
-        shadowColor: Colors.blue,
+        shadowColor: Colors.lightBlueAccent,
         elevation: 20,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              alignment: Alignment.center,
-              padding: EdgeInsets.all(6),
-              child: CircleAvatar(
-               child:  Icon(
-                 this.iconData,
-                 size: 25,
-               ),
-              )
-            ),
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(6),
+                child: CircleAvatar(
+                  backgroundColor: this.color ,
+                  child: Icon(
+                    this.iconData,
+                    size: 25,
+                    color: Colors.white,
+                  ),
+                )),
             Expanded(
                 child: Container(
               child: Row(
